@@ -19,7 +19,7 @@ public class UserTest {
 
         System.out.println("Starting assertions of test method: testUserConstructor");
 
-        if (testUser.getUsername() != test_username) {
+        if (testUser.getUsername() == test_username) {
             System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getUsername-Passed" + TestUtils.TEXT_COLOR_RESET);
         } else {
             System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getUsername-FAILED" + TestUtils.TEXT_COLOR_RESET);

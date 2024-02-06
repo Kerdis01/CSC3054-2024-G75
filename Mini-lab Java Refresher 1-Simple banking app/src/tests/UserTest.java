@@ -19,35 +19,44 @@ public class UserTest {
 
         System.out.println("Starting assertions of test method: testUserConstructor");
 
-        if (testUser.getUsername() == test_username) {
-            System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getUsername-Passed" + TestUtils.TEXT_COLOR_RESET);
-        } else {
-            System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getUsername-FAILED" + TestUtils.TEXT_COLOR_RESET);
-        }
+        assert testUser.getUsername() == test_username;
+        assert testUser.getPassword() == test_password;
+        assert testUser.getFirst_name() == test_first_name;
+        assert testUser.getLast_name() == test_last_name;
+        assert testUser.getMobile_number() == test_mobile_number;
+        assert 1==2;
 
-        if (testUser.getPassword() == test_password) {
-            System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getPassword-Passed" + TestUtils.TEXT_COLOR_RESET);
-        } else {
-            System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getPassword-FAILED" + TestUtils.TEXT_COLOR_RESET);
-        }
+        System.out.println("All Java assertions in the test suite passed (none failed).");
 
-        if (testUser.getFirst_name() == test_first_name) {
-            System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getFirstName-Passed" + TestUtils.TEXT_COLOR_RESET);
-        } else {
-            System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getFirstName-FAILED" + TestUtils.TEXT_COLOR_RESET);
-        }
+        // if (testUser.getUsername() == test_username) {
+        //     System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getUsername-Passed" + TestUtils.TEXT_COLOR_RESET);
+        // } else {
+        //     System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getUsername-FAILED" + TestUtils.TEXT_COLOR_RESET);
+        // }
 
-        if (testUser.getLast_name() == test_last_name) {
-            System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getLastName-Passed" + TestUtils.TEXT_COLOR_RESET);
-        } else {
-            System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getLastName-FAILED" + TestUtils.TEXT_COLOR_RESET);
-        }
+        // if (testUser.getPassword() == test_password) {
+        //     System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getPassword-Passed" + TestUtils.TEXT_COLOR_RESET);
+        // } else {
+        //     System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getPassword-FAILED" + TestUtils.TEXT_COLOR_RESET);
+        // }
 
-        if (testUser.getMobile_number() == test_mobile_number) {
-            System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getMobileNumber-Passed" + TestUtils.TEXT_COLOR_RESET);
-        } else {
-            System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getMobileNumber-FAILED" + TestUtils.TEXT_COLOR_RESET);
-        }
+        // if (testUser.getFirst_name() == test_first_name) {
+        //     System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getFirstName-Passed" + TestUtils.TEXT_COLOR_RESET);
+        // } else {
+        //     System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getFirstName-FAILED" + TestUtils.TEXT_COLOR_RESET);
+        // }
+
+        // if (testUser.getLast_name() == test_last_name) {
+        //     System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getLastName-Passed" + TestUtils.TEXT_COLOR_RESET);
+        // } else {
+        //     System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getLastName-FAILED" + TestUtils.TEXT_COLOR_RESET);
+        // }
+
+        // if (testUser.getMobile_number() == test_mobile_number) {
+        //     System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC1-getMobileNumber-Passed" + TestUtils.TEXT_COLOR_RESET);
+        // } else {
+        //     System.out.println(TestUtils.TEXT_COLOR_RED + "TC1-getMobileNumber-FAILED" + TestUtils.TEXT_COLOR_RESET);
+        // }
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package tests;
 
 import app.SimpleBankingApp;
-import utils.TestUtils;
+//import utils.TestUtils;
 
 public class SimpleBankingAppTest {
 

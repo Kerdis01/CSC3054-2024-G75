@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "SimpleBankingApp",
+            "request": "launch",
+            "mainClass": "app.SimpleBankingApp",
+            "projectName": "CSC3056-2024-G75_41a0c45c"
+        },
+        {
+            "type": "java",
+            "name": "SimpleBankingAppTest",
+            "request": "launch",
+            "mainClass": "tests.SimpleBankingAppTest",
+            "projectName": "CSC3056-2024-G75_41a0c45c"
+        },
+        {
+            "type": "java",
+            "name": "UserTest",
+            "request": "launch",
+            "mainClass": "tests.UserTest",
+            "projectName": "CSC3056-2024-G75_41a0c45c",
+            "vmArgs": "-enableassertions"
+        }
+    ]
+}

@@ -24,7 +24,7 @@ public class UserTest {
         assert testUser.getFirst_name() == test_first_name;
         assert testUser.getLast_name() == test_last_name;
         assert testUser.getMobile_number() == test_mobile_number;
-        assert 1==2;
+        //assert 1==2;
 
         System.out.println("All Java assertions in the test suite passed (none failed).");
 

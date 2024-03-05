@@ -327,13 +327,13 @@ public class RangeTest extends TestCase {
 
     /* Test Case ID: 29
      * Method Under Test: expand()
-     * Description: Verify expand does not alter range when margins sum to zero.
-     * Expected Outcome: Original range is returned.
+     * Description: Verify expand alters range correctly when margins are positive and negative.
+     * Expected Outcome: Range lower bound is expanded and upper bound is contracted.
      */
     @Test
     public void testExpandWithOpposingMargins() {
         Range result = Range.expand(new Range(2, 6), 0.25, -0.25);
-        assertEquals("expand: Margins sum to zero should return original range", new Range(2, 6), result);
+        assertEquals("expand: Margins sum to zero should return original range", new Range(1, 5), result);
     }
 
     /* Test Case ID: 30

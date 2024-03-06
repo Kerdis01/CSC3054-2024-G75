@@ -137,7 +137,7 @@ public class DataUtilitiesTest {
 	
 	@Test
 	public void testValidDataAndColumnTotalColumn1() {
-		assertEquals("Wrong sum returned. It should be 8.0",
+		assertEquals("Wrong sum returned. It should be 12.0",
 		12.0, DataUtilities.calculateColumnTotal(values2D, 1), 0.0000001d);
 	}
 	
@@ -313,8 +313,8 @@ public class DataUtilitiesTest {
 	
 	@Test
 	public void testValidDataAndRowTotalRow0() {
-		assertEquals("Wrong sum returned. It should be 8.0",
-		8.0, DataUtilities.calculateRowTotal(values2D, 0), 0.0000001d);
+		assertEquals("Wrong sum returned. It should be 9.0",
+		9.0, DataUtilities.calculateRowTotal(values2D, 0), 0.0000001d);
 	}
 	
 	/**
@@ -326,8 +326,8 @@ public class DataUtilitiesTest {
 	
 	@Test
 	public void testValidDataAndRowTotalRow1() {
-		assertEquals("Wrong sum returned. It should be 8.0",
-		12.0, DataUtilities.calculateRowTotal(values2D, 1), 0.0000001d);
+		assertEquals("Wrong sum returned. It should be 27.0",
+		27.0, DataUtilities.calculateRowTotal(values2D, 1), 0.0000001d);
 	}
 	
 	/**

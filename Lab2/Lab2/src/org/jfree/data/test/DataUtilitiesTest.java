@@ -485,15 +485,7 @@ public class DataUtilitiesTest {
 	public void testValidArrayData() {
 		 Number[] arrayData = DataUtilities.createNumberArray(valuesArray);
 		 Number[] expectedArrayData = {1.0,3.0,5.0,7.0,9.0,11.0};
-		 
-		 if(arrayData.length == 0) {
-			 fail("Empty array");
-		 }
-		 
-		 if(arrayData.length != valuesArray.length) {
-			 fail("Length discrepency in arrays");
-		 }
-		 
+
 		 for (int i = 0; i < arrayData.length; i++) {
 			 assertEquals(arrayData[i],expectedArrayData[i]);
 		 } 
@@ -510,15 +502,7 @@ public class DataUtilitiesTest {
 	public void testValidArrayDataNegValues() {
 		 Number[] arrayData = DataUtilities.createNumberArray(valuesArrayNeg);
 		 Number[] expectedArrayData = {-1.0,-3.0,-5.0,-7.0,-9.0,-11.0};
-		 
-		 if(arrayData.length == 0) {
-			 fail("Empty array");
-		 }
-		 
-		 if(arrayData.length != valuesArray.length) {
-			 fail("Length discrepency in arrays");
-		 }
-		 
+
 		 for (int i = 0; i < arrayData.length; i++) {
 			 assertEquals(arrayData[i],expectedArrayData[i]);
 		 } 
@@ -535,15 +519,7 @@ public class DataUtilitiesTest {
 	public void testEmptyArrayData() {
 		 Number[] arrayData = DataUtilities.createNumberArray(valuesArrayEmpty);
 		 Number[] expectedArrayData = {};
-		 
-		 if(arrayData.length == 0) {
-			 fail("Empty array");
-		 }
-		 
-		 if(arrayData.length != valuesArray.length) {
-			 fail("Length discrepency in arrays");
-		 }
-		 
+
 		 for (int i = 0; i < arrayData.length; i++) {
 			 assertEquals(arrayData[i],expectedArrayData[i]);
 		 }
@@ -580,15 +556,7 @@ public class DataUtilitiesTest {
 	public void testValidArrayData2D() {
 		 Number[][] arrayData = DataUtilities.createNumberArray2D(valuesArray2D);
 		 Number[][] expectedArrayData = {{1.0,3.0,5.0},{7.0,9.0,11.0}};
-		 
-		 if(arrayData.length == 0) {
-			 fail("Empty array");
-		 }
-		 
-		 if(arrayData.length != valuesArray2D.length) {
-			 fail("Length discrepency in arrays");
-		 }
-		 
+
 		 for (int i = 0; i < arrayData.length; i++) {
 			 for (int j = 0; j < arrayData.length; j++) {
 				assertEquals(arrayData[i][j],expectedArrayData[i][j]);
@@ -607,15 +575,7 @@ public class DataUtilitiesTest {
 	public void testValidArrayData2DNegValues() {
 		Number[][] arrayData = DataUtilities.createNumberArray2D(valuesArray2DNeg);
 		Number[][] expectedArrayData = {{-1.0,-3.0,-5.0},{-7.0,-9.0,-11.0}};
-		 
-		if(arrayData.length == 0) {
-			 fail("Empty array");
-		}
-		 
-		if(arrayData.length != valuesArray2DNeg.length) {
-			 fail("Length discrepency in arrays");
-		}
-		 
+
 		for (int i = 0; i < arrayData.length; i++) {
 			for (int j = 0; j < arrayData.length; j++) {
 				 assertEquals(arrayData[i][j],expectedArrayData[i][j]);
@@ -634,15 +594,7 @@ public class DataUtilitiesTest {
 	public void testEmptyArrayData2D() {
 		Number[][] arrayData = DataUtilities.createNumberArray2D(valuesArray2DEmpty);
 		Number[][] expectedArrayData = {{},{}};
-		 
-		if(arrayData.length == 0) {
-			fail("Empty array");
-		}
-		 
-		if(arrayData.length != valuesArray2DEmpty.length) {
-			fail("Length discrepency in arrays");
-		}
-		 
+
 		for (int i = 0; i < arrayData.length; i++) {
 			 for (int j = 0; j < arrayData.length; j++) {
 				 assertEquals(arrayData[i][j],expectedArrayData[i][j]);
@@ -682,10 +634,6 @@ public class DataUtilitiesTest {
 	public void testGetCumulativePercentagesValidValues() {
 		KeyedValues values = DataUtilities.getCumulativePercentages(keyedValues);
 		
-		if(values.getItemCount() == 0) {
-			fail("Invalid values length");
-		}
-		
 		DefaultKeyedValues testKeyedValues = new DefaultKeyedValues();
 		testKeyedValues.addValue("0", 0.02777778);
 		testKeyedValues.addValue("1", 0.11111111);
@@ -710,22 +658,9 @@ public class DataUtilitiesTest {
 	@Test
 	public void testGetCumulativePercentagesEmptyValues() {
 		KeyedValues values = DataUtilities.getCumulativePercentages(keyedValuesEmpty);
-		
-		if(values.getItemCount() == 0) {
-			fail("Invalid values length");
-		}
-		
 		DefaultKeyedValues testKeyedValues = new DefaultKeyedValues();
-		testKeyedValues.addValue("0", 0.02777778);
-		testKeyedValues.addValue("1", 0.11111111);
-		testKeyedValues.addValue("2", 0.25);
-		testKeyedValues.addValue("3", 0.44444444);
-		testKeyedValues.addValue("4", 0.69444444);
-		testKeyedValues.addValue("5", 1);
 		
-		assertEquals(testKeyedValues.getValue(0), values.getValue(0));
-		assertEquals(testKeyedValues.getValue(3), values.getValue(3));
-		assertEquals(testKeyedValues.getValue(5), values.getValue(5));
+		assertEquals(testKeyedValues, values);
 
 	}
 	

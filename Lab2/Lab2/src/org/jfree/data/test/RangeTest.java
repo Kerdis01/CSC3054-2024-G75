@@ -15,6 +15,8 @@ public class RangeTest extends TestCase {
 	private Range differentPosValuesUnderTest;
 	private Range differentNegValuesUnderTest;
 	private Range posUpperNegLowerUnderTest;
+	private Range zeroAndNegValuesUnderTest;
+	private Range zeroAndPosValuesUnderTest;
 	private Range zeroValuesUnderTest;
     private Range rangeWithBoundaryValues;
     private Range rangeWithLargePosValues;
@@ -38,6 +40,8 @@ public class RangeTest extends TestCase {
 		differentPosValuesUnderTest = new Range(3,8);
 		differentNegValuesUnderTest = new Range(-8,-3);
 		posUpperNegLowerUnderTest = new Range(-10, 10);
+		zeroAndNegValuesUnderTest = new Range(-10, 0);
+		zeroAndPosValuesUnderTest = new Range(0, 10);
 		zeroValuesUnderTest = new Range(0,0);
 		rangeWithBoundaryValues = new Range(Double.MIN_VALUE, Double.MAX_VALUE);
         rangeWithLargePosValues = new Range(1000000, 1000001);
@@ -105,6 +109,70 @@ public class RangeTest extends TestCase {
 	}
 	
 	/* Test Case ID: 6
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with zero and positive range values
+	 * Expected Outcome: 0 */
+	@Test
+	public void testGetLowerBoundZeroAndPositive() {
+	    assertEquals("getLowerBound: Expected zero for range with zero and positive bounds", 0, zeroAndPosValuesUnderTest.getLowerBound(), 0.000000001d);
+	}
+	
+	/* Test Case ID: 7
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with zero and negative range values
+	 * Expected Outcome: -1 */
+	@Test
+	public void testGetLowerBoundZeroAndNegative() {
+	    assertEquals("getLowerBound: Expected negative value for range with zero and negative bounds", -10, zeroAndNegValuesUnderTest.getLowerBound(), 0.000000001d);
+	}
+	
+	/* Test Case ID: 8
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with boundary range values
+	 * Expected Outcome: Double.MIN_VALUE */
+	@Test
+	public void testGetLowerBoundBoundaryValues() {
+	    assertEquals("getLowerBound: Expected Double.MIN_VALUE for range with boundary values", Double.MIN_VALUE, rangeWithBoundaryValues.getLowerBound(), 0.000000001d);
+	}
+	
+	/* Test Case ID: 9
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with large positive range values
+	 * Expected Outcome: 1000000 */
+	@Test
+	public void testGetLowerBoundLargePosValues() {
+	    assertEquals("getLowerBound: Expected 1000000 for range with large positive values", 1000000, rangeWithLargePosValues.getLowerBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 10
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with large negative range values
+	 * Expected Outcome: -1000001 */
+	@Test
+	public void testGetLowerBoundLargeNegValues() {
+	    assertEquals("getLowerBound: Expected -1000001 for range with large negative values", -1000001, rangeWithLargeNegValues.getLowerBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 11
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with maximum double range values
+	 * Expected Outcome: Double.MAX_VALUE */
+	@Test
+	public void testGetLowerBoundMaxDoubleValues() {
+	    assertEquals("getLowerBound: Expected Double.MAX_VALUE for range with maximum double values", Double.MAX_VALUE, rangeWithMaxDoubleValues.getLowerBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 12
+	 * Method Under Test: getLowerBound()
+	 * Description: Verify getLowerBound with minimum double range values
+	 * Expected Outcome: Double.MIN_VALUE */
+	@Test
+	public void testGetLowerBoundMinDoubleValues() {
+	    assertEquals("getLowerBound: Expected Double.MIN_VALUE for range with minimum double values", Double.MIN_VALUE, rangeWithMinDoubleValues.getLowerBound(), 0.000000001d);
+	}
+
+	
+	/* Test Case ID: 13
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with same positive values 
 	 * Expected Outcome: 1*/
@@ -113,7 +181,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Did not return the expected output", 1, samePosValuesUnderTest.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 7
+	/* Test Case ID: 14
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with same negative values  
 	 * Expected Outcome: -1*/
@@ -122,7 +190,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Did not return the expected output", -1, sameNegValuesUnderTest.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 8
+	/* Test Case ID: 15
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with different positive values  
 	 * Expected Outcome: 8*/
@@ -131,7 +199,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Did not return the expected output", 8, differentPosValuesUnderTest.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 9
+	/* Test Case ID: 16
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with positive upper and negative lower values  
 	 * Expected Outcome: 10*/
@@ -140,7 +208,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Did not return the expected output", 10, posUpperNegLowerUnderTest.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 10
+	/* Test Case ID: 17
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with different negative values  
 	 * Expected Outcome: -3*/
@@ -148,8 +216,71 @@ public class RangeTest extends TestCase {
 	public void testGetUpperBoundSucceedsWhenBothDifferentNegValues() {
 	    assertEquals("getUpperBound: Did not return the expected output", -3, differentNegValuesUnderTest.getUpperBound(), 0.000000001d);
 	}
+	
+	/* Test Case ID: 18
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with zero and positive range values
+	 * Expected Outcome: 0 */
+	@Test
+	public void testGetUpperBoundZeroAndPositive() {
+	    assertEquals("getUpperBound: Expected zero for range with zero and positive bounds", 10, zeroAndPosValuesUnderTest.getUpperBound(), 0.000000001d);
+	}
 
-	/* Test Case ID: 11
+	/* Test Case ID: 19
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with zero and negative range values
+	 * Expected Outcome: 0 */
+	@Test
+	public void testGetUpperBoundZeroAndNegative() {
+	    assertEquals("getUpperBound: Expected zero for range with zero and negative bounds", 0, zeroAndNegValuesUnderTest.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 20
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with boundary range values
+	 * Expected Outcome: Double.MAX_VALUE */
+	@Test
+	public void testGetUpperBoundBoundaryValues() {
+	    assertEquals("getUpperBound: Expected Double.MAX_VALUE for range with boundary values", Double.MAX_VALUE, rangeWithBoundaryValues.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 21
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with large positive range values
+	 * Expected Outcome: 1000001 */
+	@Test
+	public void testGetUpperBoundLargePosValues() {
+	    assertEquals("getUpperBound: Expected 1000001 for range with large positive values", 1000001, rangeWithLargePosValues.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 22
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with large negative range values
+	 * Expected Outcome: -1000000 */
+	@Test
+	public void testGetUpperBoundLargeNegValues() {
+	    assertEquals("getUpperBound: Expected -1000000 for range with large negative values", -1000000, rangeWithLargeNegValues.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 23
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with maximum double range values
+	 * Expected Outcome: Double.MAX_VALUE */
+	@Test
+	public void testGetUpperBoundMaxDoubleValues() {
+	    assertEquals("getUpperBound: Expected Double.MAX_VALUE for range with maximum double values", Double.MAX_VALUE, rangeWithMaxDoubleValues.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 25
+	 * Method Under Test: getUpperBound()
+	 * Description: Verify getUpperBound with minimum double range values
+	 * Expected Outcome: Double.MIN_VALUE */
+	@Test
+	public void testGetUpperBoundMinDoubleValues() {
+	    assertEquals("getUpperBound: Expected Double.MIN_VALUE for range with minimum double values", Double.MIN_VALUE, rangeWithMinDoubleValues.getUpperBound(), 0.000000001d);
+	}
+
+	/* Test Case ID: 1
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with positive range  
 	 * Expected Outcome: 5*/

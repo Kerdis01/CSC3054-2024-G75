@@ -271,7 +271,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Expected Double.MAX_VALUE for range with maximum double values", Double.MAX_VALUE, rangeWithMaxDoubleValues.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 25
+	/* Test Case ID: 24
 	 * Method Under Test: getUpperBound()
 	 * Description: Verify getUpperBound with minimum double range values
 	 * Expected Outcome: Double.MIN_VALUE */
@@ -280,7 +280,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getUpperBound: Expected Double.MIN_VALUE for range with minimum double values", Double.MIN_VALUE, rangeWithMinDoubleValues.getUpperBound(), 0.000000001d);
 	}
 
-	/* Test Case ID: 1
+	/* Test Case ID: 25
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with positive range  
 	 * Expected Outcome: 5*/
@@ -289,7 +289,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 5, differentPosValuesUnderTest.getLength(), 0.000000001d);
 	}
 
-	/* Test Case ID: 12
+	/* Test Case ID: 26
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with negative range  
 	 * Expected Outcome: 5*/
@@ -298,7 +298,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 5, differentNegValuesUnderTest.getLength(), 0.000000001d);
 	}
 
-	/* Test Case ID: 13
+	/* Test Case ID: 27
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with zero range  
 	 * Expected Outcome: 0*/
@@ -307,7 +307,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 0, zeroValuesUnderTest.getLength(), 0.000000001d);
 	}
 
-	/* Test Case ID: 14
+	/* Test Case ID: 28
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with negative and positive range  
 	 * Expected Outcome: 20*/
@@ -316,7 +316,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 20, posUpperNegLowerUnderTest.getLength(), 0.000000001d);
 	}
 
-	/* Test Case ID: 15
+	/* Test Case ID: 29
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with boundary values  
 	 * Expected Outcome: 0*/
@@ -325,7 +325,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", Double.MAX_VALUE - Double.MIN_VALUE, rangeWithBoundaryValues.getLength(), 0.0000001d);
 	}
 
-	/* Test Case ID: 16
+	/* Test Case ID: 30
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with large positive values   
 	 * Expected Outcome: 1*/
@@ -334,7 +334,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 1, rangeWithLargePosValues.getLength(), 0.0000001d);
 	}
 
-	/* Test Case ID: 17
+	/* Test Case ID: 31
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with large negative values   
 	 * Expected Outcome: 1*/
@@ -343,7 +343,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 1, rangeWithLargeNegValues.getLength(), 0.0000001d);
 	}
 
-	/* Test Case ID: 18
+	/* Test Case ID: 32
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with max double values   
 	 * Expected Outcome: 0*/
@@ -352,7 +352,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 0, rangeWithMaxDoubleValues.getLength(), 0.0000001d);
 	}
 
-	/* Test Case ID: 19
+	/* Test Case ID: 33
 	 * Method Under Test: getLength()
 	 * Description: Verify getLength with min double values   
 	 * Expected Outcome: 0*/
@@ -361,7 +361,7 @@ public class RangeTest extends TestCase {
 	    assertEquals("getLength: Did not return the expected output", 0, rangeWithMinDoubleValues.getLength(), 0.0000001d);
 	}
 
-	/* Test Case ID: 20
+	/* Test Case ID: 34
 	 * Method Under Test: contains()
 	 * Description: Verify value inside range is contained.  
 	 * Expected Outcome: True*/
@@ -370,7 +370,7 @@ public class RangeTest extends TestCase {
         assertTrue("contains: Should return true for value within range", exampleRangeForContains.contains(0));
     }
 
-    /* Test Case ID: 21
+    /* Test Case ID: 35
 	 * Method Under Test: contains()
 	 * Description: Verify lower bound value is contained.  
 	 * Expected Outcome: True */
@@ -379,7 +379,7 @@ public class RangeTest extends TestCase {
         assertTrue("contains: Should return true for lower bound", exampleRangeForContains.contains(-10));
     }
 
-    /* Test Case ID: 22
+    /* Test Case ID: 36
 	 * Method Under Test: contains()
 	 * Description: Verify upper bound value is contained.  
 	 * Expected Outcome: True*/
@@ -388,7 +388,7 @@ public class RangeTest extends TestCase {
         assertTrue("contains: Should return true for upper bound", exampleRangeForContains.contains(10));
     }
 
-    /* Test Case ID: 23
+    /* Test Case ID: 37
 	 * Method Under Test: contains()
 	 * Description: Verify value below range is not contained.  
 	 * Expected Outcome: False*/
@@ -397,7 +397,7 @@ public class RangeTest extends TestCase {
         assertFalse("contains: Should return false for value below range", exampleRangeForContains.contains(-11));
     }
 
-    /* Test Case ID: 24
+    /* Test Case ID: 38
 	 * Method Under Test: contains()
 	 * Description: Verify value above range is not contained.   
 	 * Expected Outcome: False*/
@@ -406,8 +406,7 @@ public class RangeTest extends TestCase {
         assertFalse("contains: Should return false for value above range", exampleRangeForContains.contains(11));
     }
     
-    
-    /* Test Case ID: 25
+    /* Test Case ID: 39
      * Method Under Test: expand()
      * Description: Verify expand returns correct range with positive margins.
      * Expected Outcome: New range with expanded margins.
@@ -418,7 +417,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: Should return expanded range", new Range(1, 8), result);
     }
 
-    /* Test Case ID: 26
+    /* Test Case ID: 40
      * Method Under Test: expand()
      * Description: Verify expand handles zero margins.
      * Expected Outcome: Original range is returned.
@@ -429,7 +428,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: Should return original range", new Range(2, 6), result);
     }
     /**
-     * Test Case ID: 27
+     * Test Case ID: 41
      * Method Under Test: expand()
      * Description: Verify expand throws InvalidParameterException with null range.
      * Expected Outcome: InvalidParameterException is thrown.
@@ -445,7 +444,7 @@ public class RangeTest extends TestCase {
         }
     }
 
-    /* Test Case  ID: 28
+    /* Test Case  ID: 42
      * Method Under Test: expand()
      * Description: Verify expand with large positive margins.
      * Expected Outcome: Correctly expanded range with large margins.
@@ -456,7 +455,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: Should return range with large margins", new Range(-2, 10), result);
     }
 
-    /* Test Case ID: 29
+    /* Test Case ID: 43
      * Method Under Test: expand()
      * Description: Verify expand alters range correctly when margins are positive and negative.
      * Expected Outcome: Range lower bound is expanded and upper bound is contracted.
@@ -467,7 +466,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: Margins sum to zero should return original range", new Range(1, 5), result);
     }
 
-    /* Test Case ID: 30
+    /* Test Case ID: 44
      * Method Under Test: expand()
      * Description: Verify expand with one zero margin.
      * Expected Outcome: Partially expanded range.
@@ -478,7 +477,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: One zero margin should return partially expanded range", new Range(2, 8), result);
     }
 
-    /* Test Case ID: 31
+    /* Test Case ID: 45
      * Method Under Test: expand()
      * Description: Verify expand with one margin exceeding 100%.
      * Expected Outcome: Range is expanded beyond double its size in one direction.
@@ -489,7 +488,7 @@ public class RangeTest extends TestCase {
         assertEquals("expand: Margin exceeding 100% should expand range greatly", new Range(2, 14), result);
     }
 
-    /* Test Case ID: 32
+    /* Test Case ID: 46
      * Method Under Test: expand()
      * Description: Verify expand with margins resulting in a zero-length range.
      * Expected Outcome: Range is contracted to a single point.
@@ -501,7 +500,7 @@ public class RangeTest extends TestCase {
     }
 
     /**
-     * Test Case ID: 33
+     * Test Case ID: 47
      * Method Under Test: expand()
      * Description: Verify expand with margins that would invert the range throws an IllegalArgumentException.
      * Expected Outcome: IllegalArgumentException is thrown due to negative margins inverting the range.

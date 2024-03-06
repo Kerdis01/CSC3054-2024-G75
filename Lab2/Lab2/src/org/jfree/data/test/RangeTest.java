@@ -458,12 +458,12 @@ public class RangeTest extends TestCase {
     /* Test Case ID: 43
      * Method Under Test: expand()
      * Description: Verify expand alters range correctly when margins are positive and negative.
-     * Expected Outcome: Range lower bound is expanded and upper bound is contracted.
+     * Expected Outcome: Both margins should contract.
      */
     @Test
     public void testExpandWithOpposingMargins() {
         Range result = Range.expand(new Range(2, 6), 0.25, -0.25);
-        assertEquals("expand: Margins sum to zero should return original range", new Range(1, 5), result);
+        assertEquals("expand: Should return with contracting margins on both sides", new Range(1, 5), result);
     }
 
     /* Test Case ID: 44

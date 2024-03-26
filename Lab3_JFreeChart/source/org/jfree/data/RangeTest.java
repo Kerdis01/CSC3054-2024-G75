@@ -513,6 +513,496 @@ public class RangeTest extends TestCase {
         } catch (IllegalArgumentException e) {
         }
     }
+    
+    //WHITE BOX TESTING
+    
+    /**
+     * Test Case ID: 48
+     * Method Under Test: equals()
+     * Description: Verify equals with an object that is not an instance of Range.
+     * Expected Outcome: The method should return false.
+     */
+    @Test
+    public void testEqualsWithDifferentClass() {
+        Range range = new Range(1.0, 5.0);
+        assertFalse("equals: Non-Range instance should return false", range.equals("Not a Range"));
+    }
+
+    /**
+     * Test Case ID: 49
+     * Method Under Test: equals()
+     * Description: Verify equals with a null reference.
+     * Expected Outcome: The method should return false.
+     */
+    @Test
+    public void testEqualsWithNull() {
+        Range range = new Range(1.0, 5.0);
+        assertFalse("equals: Null reference should return false", range.equals(null));
+    }
+
+    /**
+     * Test Case ID: 50
+     * Method Under Test: equals()
+     * Description: Verify equals with a Range object with a different lower bound.
+     * Expected Outcome: The method should return false.
+     */
+    @Test
+    public void testEqualsWithDifferentLowerBound() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(2.0, 5.0);
+        assertFalse("equals: Different lower bounds should return false", range1.equals(range2));
+    }
+
+    /**
+     * Test Case ID: 51
+     * Method Under Test: equals()
+     * Description: Verify equals with a Range object with a different upper bound.
+     * Expected Outcome: The method should return false.
+     */
+    @Test
+    public void testEqualsWithDifferentUpperBound() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(1.0, 6.0);
+        assertFalse("equals: Different upper bounds should return false", range1.equals(range2));
+    }
+
+    /**
+     * Test Case ID: 52
+     * Method Under Test: equals()
+     * Description: Verify equals with a Range object that has the same lower and upper bounds.
+     * Expected Outcome: The method should return true.
+     */
+    @Test
+    public void testEqualsWithIdenticalRange() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(1.0, 5.0);
+        assertTrue("equals: Identical ranges should return true", range1.equals(range2));
+    }
+
+    /**
+     * Test Case ID: 53
+     * Method Under Test: equals()
+     * Description: Verify equals with the same object reference.
+     * Expected Outcome: The method should return true.
+     */
+    @Test
+    public void testEqualsWithSameObject() {
+        Range range = new Range(1.0, 5.0);
+        assertTrue("equals: Same object reference should return true", range.equals(range));
+    }
+
+    /**
+     * Test Case ID: 54
+     * Method Under Test: combine()
+     * Description: Verify combine with the first range being null.
+     * Expected Outcome: The method should return the second range.
+     */
+    @Test
+    public void testCombineFirstRangeNull() {
+        Range range1 = null;
+        Range range2 = new Range(3.0, 7.0);
+        Range result = Range.combine(range1, range2);
+        assertSame("combine: First range null should return second range", range2, result);
+    }
+
+    /**
+     * Test Case ID: 55
+     * Method Under Test: combine()
+     * Description: Verify combine with the second range being null.
+     * Expected Outcome: The method should return the first range.
+     */
+    @Test
+    public void testCombineSecondRangeNull() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = null;
+        Range result = Range.combine(range1, range2);
+        assertSame("combine: Second range null should return first range", range1, result);
+    }
+
+    /**
+     * Test Case ID: 56
+     * Method Under Test: combine()
+     * Description: Verify combine with both ranges being non-null and disjoint.
+     * Expected Outcome: The method should return a range that encompasses both input ranges.
+     */
+    @Test
+    public void testCombineNonNullDisjointRanges() {
+        Range range1 = new Range(1.0, 2.0);
+        Range range2 = new Range(3.0, 4.0);
+        Range result = Range.combine(range1, range2);
+        assertEquals("combine: Non-null disjoint ranges should return encompassing range", new Range(1.0, 4.0), result);
+    }
+
+    /**
+     * Test Case ID: 57
+     * Method Under Test: combine()
+     * Description: Verify combine with both ranges being non-null and overlapping.
+     * Expected Outcome: The method should return a range that encompasses both input ranges.
+     */
+    @Test
+    public void testCombineNonNullOverlappingRanges() {
+        Range range1 = new Range(1.0, 3.0);
+        Range range2 = new Range(2.0, 5.0);
+        Range result = Range.combine(range1, range2);
+        assertEquals("combine: Non-null overlapping ranges should return encompassing range", new Range(1.0, 5.0), result);
+    }
+
+    /**
+     * Test Case ID: 58
+     * Method Under Test: combine()
+     * Description: Verify combine with both ranges being null.
+     * Expected Outcome: The method should return null.
+     */
+    @Test
+    public void testCombineBothRangesNull() {
+        Range range1 = null;
+        Range range2 = null;
+        Range result = Range.combine(range1, range2);
+        assertNull("combine: Both ranges null should return null", result);
+    }
+
+    /**
+     * Test Case ID: 59
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a null range.
+     * Expected Outcome: The method should return a new range equal to the value.
+     */
+    @Test
+    public void testExpandToIncludeWithNullRange() {
+        double value = 5.0;
+        Range result = Range.expandToInclude(null, value);
+        assertEquals("expandToInclude: Null range should return new range from value", new Range(value, value), result);
+    }
+
+    /**
+     * Test Case ID: 60
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a value less than the lower bound of the range.
+     * Expected Outcome: The method should return a new range with the lower bound equal to the value.
+     */
+    @Test
+    public void testExpandToIncludeWithValueBelowLowerBound() {
+        Range range = new Range(10.0, 20.0);
+        double value = 5.0;
+        Range result = Range.expandToInclude(range, value);
+        assertEquals("expandToInclude: Value below lower bound should return new range with lower bound as value", new Range(value, range.getUpperBound()), result);
+    }
+
+    /**
+     * Test Case ID: 61
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a value greater than the upper bound of the range.
+     * Expected Outcome: The method should return a new range with the upper bound equal to the value.
+     */
+    @Test
+    public void testExpandToIncludeWithValueAboveUpperBound() {
+        Range range = new Range(10.0, 20.0);
+        double value = 25.0;
+        Range result = Range.expandToInclude(range, value);
+        assertEquals("expandToInclude: Value above upper bound should return new range with upper bound as value", new Range(range.getLowerBound(), value), result);
+    }
+
+    /**
+     * Test Case ID: 62
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a value within the bounds of the range.
+     * Expected Outcome: The method should return the same range.
+     */
+    @Test
+    public void testExpandToIncludeWithValueWithinRange() {
+        Range range = new Range(10.0, 20.0);
+        double value = 15.0;
+        Range result = Range.expandToInclude(range, value);
+        assertSame("expandToInclude: Value within range bounds should return same range", range, result);
+    }
+
+    /**
+     * Test Case ID: 63
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a value equal to the lower bound of the range.
+     * Expected Outcome: The method should return the same range.
+     */
+    @Test
+    public void testExpandToIncludeWithValueEqualToLowerBound() {
+        Range range = new Range(10.0, 20.0);
+        double value = 10.0;
+        Range result = Range.expandToInclude(range, value);
+        assertSame("expandToInclude: Value equal to lower bound should return same range", range, result);
+    }
+
+    /**
+     * Test Case ID: 64
+     * Method Under Test: expandToInclude()
+     * Description: Verify expandToInclude with a value equal to the upper bound of the range.
+     * Expected Outcome: The method should return the same range.
+     */
+    @Test
+    public void testExpandToIncludeWithValueEqualToUpperBound() {
+        Range range = new Range(10.0, 20.0);
+        double value = 20.0;
+        Range result = Range.expandToInclude(range, value);
+        assertSame("expandToInclude: Value equal to upper bound should return same range", range, result);
+    }
+    
+    /**
+     * Test Case ID: 65
+     * Method Under Test: intersects()
+     * Description: Verify intersects where the provided lower bound is less than or equal to the range's lower bound and the provided upper bound is greater than the range's lower bound.
+     * Expected Outcome: The method should return true as the ranges do intersect.
+     */
+    @Test
+    public void testIntersectsLowerBoundLessThanRangeLower() {
+        Range range = new Range(10.0, 20.0);
+        assertTrue("intersects: Lower bound less than range lower should return true", range.intersects(5.0, 15.0));
+    }
+
+    /**
+     * Test Case ID: 66
+     * Method Under Test: intersects()
+     * Description: Verify intersects where the provided upper bound is less than the range's lower bound.
+     * Expected Outcome: The method should return false as the ranges do not intersect.
+     */
+    @Test
+    public void testIntersectsUpperBoundLessThanRangeLower() {
+        Range range = new Range(10.0, 20.0);
+        assertFalse("intersects: Upper bound less than range lower should return false", range.intersects(5.0, 9.0));
+    }
+
+    /**
+     * Test Case ID: 67
+     * Method Under Test: intersects()
+     * Description: Verify intersects where the provided upper bound is within the range's bounds.
+     * Expected Outcome: The method should return true as the ranges do intersect.
+     */
+    @Test
+    public void testIntersectsUpperBoundWithinRange() {
+        Range range = new Range(10.0, 20.0);
+        assertTrue("intersects: Upper bound within range should return true", range.intersects(15.0, 18.0));
+    }
+
+    /**
+     * Test Case ID: 68
+     * Method Under Test: intersects()
+     * Description: Verify intersects where the provided lower bound is greater than the range's upper bound.
+     * Expected Outcome: The method should return false as the ranges do not intersect.
+     */
+    @Test
+    public void testIntersectsLowerBoundGreaterThanRangeUpper() {
+        Range range = new Range(10.0, 20.0);
+        assertFalse("intersects: Lower bound greater than range upper should return false", range.intersects(21.0, 25.0));
+    }
+
+    /**
+     * Test Case ID: 69
+     * Method Under Test: intersects()
+     * Description: Verify intersects where both provided bounds are outside but around the range's bounds.
+     * Expected Outcome: The method should return true as the ranges do intersect.
+     */
+    @Test
+    public void testIntersectsBoundsAroundRange() {
+        Range range = new Range(10.0, 20.0);
+        assertTrue("intersects: Bounds around range should return true", range.intersects(5.0, 25.0));
+    }
+
+    /**
+     * Test Case ID: 70
+     * Method Under Test: hashCode()
+     * Description: Verify that the same range instances produce the same hash code.
+     * Expected Outcome: The hash codes of two identical range instances should be equal.
+     */
+    @Test
+    public void testHashCodeConsistencyForSameRange() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(1.0, 5.0);
+        assertEquals("hashCode: Identical ranges should have the same hash code", range1.hashCode(), range2.hashCode());
+    }
+
+    /**
+     * Test Case ID: 71
+     * Method Under Test: hashCode()
+     * Description: Verify that different range instances have different hash codes.
+     * Expected Outcome: The hash codes of two different range instances should not be equal.
+     */
+    @Test
+    public void testHashCodeDifferenceForDifferentRanges() {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(2.0, 6.0);
+        assertFalse("hashCode: Different ranges should have different hash codes", range1.hashCode() == range2.hashCode());
+    }
+
+    /**
+     * Test Case ID: 72
+     * Method Under Test: hashCode()
+     * Description: Verify the hashCode for the same range instance called multiple times.
+     * Expected Outcome: The hash code should be consistent across multiple invocations.
+     */
+    @Test
+    public void testHashCodeConsistencyOverTime() {
+        Range range = new Range(1.0, 5.0);
+        int initialHashCode = range.hashCode();
+        int consistentHashCode = range.hashCode();
+        assertEquals("hashCode: Multiple invocations should return the same hash code", initialHashCode, consistentHashCode);
+    }
+    
+    /**
+     * Test Case ID: 73
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range to the right by a positive delta works as expected.
+     * Expected Outcome: The method should return a new range shifted to the right by delta.
+     */
+    @Test
+    public void testShiftRightByPositiveDelta() {
+        Range base = new Range(1.0, 5.0);
+        double delta = 2.0;
+        Range expected = new Range(3.0, 7.0);
+        Range actual = Range.shift(base, delta);
+        assertEquals("shift: Positive delta should shift range to the right", expected, actual);
+    }
+
+    /**
+     * Test Case ID: 74
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range to the right by a negative delta returns the original range.
+     * Expected Outcome: Since the method does not allow zero crossing, a negative delta should have no effect and return the original range.
+     */
+    @Test
+    public void testShiftRightByNegativeDelta() {
+        Range base = new Range(1.0, 5.0);
+        double delta = -0.5;
+        Range actual = Range.shift(base, delta);
+        assertSame("shift: Negative delta should not shift range due to zero crossing prevention", base, actual);
+    }
+
+    /**
+     * Test Case ID: 75
+     * Method Under Test: shift()
+     * Description: Verify shifting a range with zero delta returns the same range.
+     * Expected Outcome: A zero delta means no shift, so the original range should be returned.
+     */
+    @Test
+    public void testShiftByZeroDelta() {
+        Range base = new Range(1.0, 5.0);
+        double delta = 0.0;
+        Range actual = Range.shift(base, delta);
+        assertSame("shift: Zero delta should return the same range", base, actual);
+    }
+
+    /**
+     * Test Case ID: 76
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range with positive delta and zero crossing allowed returns a new range shifted right.
+     * Expected Outcome: The method should return a new range with both bounds shifted right by delta.
+     */
+    @Test
+    public void testShiftWithPositiveDeltaAllowZeroCrossing() {
+        Range base = new Range(-2.0, 2.0);
+        double delta = 5.0;
+        Range expected = new Range(3.0, 7.0);
+        Range actual = Range.shift(base, delta, true);
+        assertEquals("shift: Positive delta with zero crossing allowed should return shifted range", expected, actual);
+    }
+
+    /**
+     * Test Case ID: 77
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range with negative delta and zero crossing not allowed adjusts to zero.
+     * Expected Outcome: The method should return a new range adjusted to zero instead of crossing it.
+     */
+    @Test
+    public void testShiftWithNegativeDeltaNoZeroCrossing() {
+        Range base = new Range(1.0, 5.0);
+        double delta = -2.0;
+        Range actual = Range.shift(base, delta, false);
+        assertEquals("shift: Negative delta with zero crossing not allowed should adjust to zero", 0.0, actual.getLowerBound(), 0.00001);
+        assertEquals("shift: Negative delta with zero crossing not allowed should adjust to zero", 3.0, actual.getUpperBound(), 0.00001);
+    }
+
+    /**
+     * Test Case ID: 78
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range with zero delta returns the same range when zero crossing is allowed.
+     * Expected Outcome: The method should return the same range, unchanged.
+     */
+    @Test
+    public void testShiftByZeroDeltaAllowZeroCrossing() {
+        Range base = new Range(1.0, 5.0);
+        double delta = 0.0;
+        Range actual = Range.shift(base, delta, true);
+        assertEquals("shift: Zero delta with zero crossing allowed should return the same range", base, actual);
+    }
+
+    /**
+     * Test Case ID: 79
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range with positive delta and zero crossing not allowed returns the same range when shift would cause zero crossing.
+     * Expected Outcome: The method should return the same range when shift to negative is prevented.
+     */
+    @Test
+    public void testShiftWithPositiveDeltaNoZeroCrossing() {
+        Range base = new Range(-3.0, -1.0);
+        double delta = 1.0;
+        Range actual = Range.shift(base, delta, false);
+        assertEquals("shift: Positive delta with zero crossing not allowed should return adjusted range", 0.0, actual.getLowerBound(), 0.00001);
+        assertEquals("shift: Positive delta with zero crossing not allowed should return adjusted range", 0.0, actual.getUpperBound(), 0.00001);
+    }
+
+    /**
+     * Test Case ID: 80
+     * Method Under Test: constrain()
+     * Description: Verify that a value outside the range on the upper side is constrained to the upper bound.
+     * Expected Outcome: The method should return the upper bound of the range.
+     */
+    @Test
+    public void testConstrainValueAboveUpper() {
+        Range range = new Range(1.0, 5.0);
+        double value = 6.0;
+        double expected = 5.0;
+        double actual = range.constrain(value);
+        assertEquals("constrain: Value above upper bound should be constrained to upper bound", expected, actual, 0.00001);
+    }
+
+    /**
+     * Test Case ID: 81
+     * Method Under Test: constrain()
+     * Description: Verify that a value outside the range on the lower side is constrained to the lower bound.
+     * Expected Outcome: The method should return the lower bound of the range.
+     */
+    @Test
+    public void testConstrainValueBelowLower() {
+        Range range = new Range(1.0, 5.0);
+        double value = 0.0;
+        double expected = 1.0;
+        double actual = range.constrain(value);
+        assertEquals("constrain: Value below lower bound should be constrained to lower bound", expected, actual, 0.00001);
+    }
+
+    /**
+     * Test Case ID: 82
+     * Method Under Test: constrain()
+     * Description: Verify that a value within the range is returned unchanged.
+     * Expected Outcome: The method should return the input value.
+     */
+    @Test
+    public void testConstrainValueWithinRange() {
+        Range range = new Range(1.0, 5.0);
+        double value = 3.0;
+        double actual = range.constrain(value);
+        assertEquals("constrain: Value within the range should be returned unchanged", value, actual, 0.00001);
+    }
+    
+    /**
+     * Test Case ID: 83
+     * Method Under Test: getCentralValue()
+     * Description: Verify that the method returns the correct central value of the range.
+     * Expected Outcome: The method should return the midpoint between the lower and upper bounds of the range.
+     */
+    @Test
+    public void testGetCentralValue() {
+        Range range = new Range(1.0, 5.0);
+        double expected = 3.0; // The midpoint of 1.0 and 5.0 is 3.0
+        double actual = range.getCentralValue();
+        assertEquals("getCentralValue: Should return central value of the range", expected, actual, 0.00001);
+    }
 
 
 }

@@ -681,5 +681,107 @@ public class DataUtilitiesTest {
 					e.getClass().equals(IllegalArgumentException.class));
 		}
 	}
+	
+	//WHITE BOX TESTING
+	
+	/**
+	 * Test Case ID: 36
+	 * Method Under Test: calculateColumnTotal
+	 * Description: Verify that calculateColumnTotal correctly handles null values in the data set.
+	 * Expected Outcome: The method should return the sum of non-null values in the specified column.
+	 */
+	@Test
+	public void testCalculateColumnTotalWithNullValues() {
+	    final Number[][] data = new Number[][]{
+	        {1.0, 2.0},
+	        {null, 4.0},
+	        {3.0, 6.0}
+	    };
+	    Values2D valuesWithNull = new Values2D() {
+	        public int getRowCount() {
+	            return data.length;
+	        }
+
+	        public int getColumnCount() {
+	            return data[0].length;
+	        }
+
+	        public Number getValue(int row, int column) {
+	            return data[row][column];
+	        }
+	    };
+
+	    double expected = 4.0; // Only row 0 and row 2 should be summed, as row 1 is null for column 0.
+	    double actual = DataUtilities.calculateColumnTotal(valuesWithNull, 0);
+	    assertEquals("calculateColumnTotal should sum non-null values and skip nulls", expected, actual, 0.0000001d);
+	}
+	
+	/**
+	 * Test Case ID: 37
+	 * Method Under Test: calculateRowTotal
+	 * Description: Verify that calculateRowTotal correctly handles null values in the data set.
+	 * Expected Outcome: The method should return the sum of non-null values in the specified row.
+	 */
+	@Test
+	public void testCalculateRowTotalWithNullValues() {
+	    final Number[][] data = new Number[][]{
+	        {1.0, null, 3.0}, // Row with a null value
+	        {4.0, 5.0, 6.0}
+	    };
+	    Values2D valuesWithNull = new Values2D() {
+	        public int getRowCount() {
+	            return data.length;
+	        }
+
+	        public int getColumnCount() {
+	            return data[0].length;
+	        }
+
+	        public Number getValue(int row, int column) {
+	            return data[row][column];
+	        }
+	    };
+
+	    double expected = 4.0; // Only the non-null values (1.0 and 3.0) in the first row should be summed.
+	    double actual = DataUtilities.calculateRowTotal(valuesWithNull, 0);
+	    assertEquals("calculateRowTotal should sum non-null values and skip nulls in the specified row", expected, actual, 0.0000001d);
+	}
+
+	/**
+	 * Test Case ID: 38
+	 * Method Under Test: getCumulativePercentages
+	 * Description: Verify that getCumulativePercentages handles null values within the KeyedValues correctly, without including them in the cumulative percentage calculation.
+	 * Expected Outcome: The correct cumulative percentages should be calculated only on the basis of non-null values.
+	 */
+	@Test
+	public void testGetCumulativePercentagesWithNullValues() {
+	    DefaultKeyedValues valuesWithNull = new DefaultKeyedValues();
+	    valuesWithNull.addValue("A", 1.0);
+	    // Directly manipulate the data structure to add a null entry
+	    valuesWithNull.addValue("B", null);
+	    valuesWithNull.addValue("C", 2.0);
+	    valuesWithNull.addValue("D", 3.0);
+
+	    KeyedValues result = DataUtilities.getCumulativePercentages(valuesWithNull);
+
+	    DefaultKeyedValues expectedValues = new DefaultKeyedValues();
+	    expectedValues.addValue("A", 1.0 / 6.0);
+	    // Assume that the method should maintain the null entry
+	    expectedValues.addValue("B", null); 
+	    expectedValues.addValue("C", 3.0 / 6.0);
+	    expectedValues.addValue("D", 1.0);
+
+	    for (int i = 0; i < expectedValues.getItemCount(); i++) {
+	        Number expected = expectedValues.getValue(i);
+	        Number actual = result.getValue(i);
+
+	        if (expected == null) {
+	            assertNull("Expected null for index " + i, actual);
+	        } else {
+	            assertEquals("Incorrect cumulative percentage at index " + i,
+	                         expected.doubleValue(), actual.doubleValue(), 0.0000001d);
+	        }
+	    }
+	}
 
 }

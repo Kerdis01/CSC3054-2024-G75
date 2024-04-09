@@ -313,13 +313,18 @@ public strictfp class Range implements Serializable {
      */
     private static double shiftWithNoZeroCrossing(double value, double delta) {
         if (value > 0.0) {
+        //if (value >= 0.0) {
             return Math.max(value + delta, 0.0);  
+            //return Math.max(value - delta, 0.0); 
         }
         else if (value < 0.0) {
+        //else if (value <= 0.0) {
             return Math.min(value + delta, 0.0);
+            //return Math.min(value - delta, 0.0);
         }
         else {
-            return value + delta;   
+            return value + delta;
+            //return value - delta;
         }
     }
     

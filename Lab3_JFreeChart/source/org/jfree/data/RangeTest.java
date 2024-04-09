@@ -999,7 +999,7 @@ public class RangeTest extends TestCase {
     @Test
     public void testGetCentralValue() {
         Range range = new Range(1.0, 5.0);
-        double expected = 3.0; // The midpoint of 1.0 and 5.0 is 3.0
+        double expected = 3.0;
         double actual = range.getCentralValue();
         assertEquals("getCentralValue: Should return central value of the range", expected, actual, 0.00001);
     }

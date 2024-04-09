@@ -711,7 +711,7 @@ public class DataUtilitiesTest {
 	        }
 	    };
 
-	    double expected = 4.0; // Only row 0 and row 2 should be summed, as row 1 is null for column 0.
+	    double expected = 4.0; 
 	    double actual = DataUtilities.calculateColumnTotal(valuesWithNull, 0);
 	    assertEquals("calculateColumnTotal should sum non-null values and skip nulls", expected, actual, 0.0000001d);
 	}
@@ -725,7 +725,7 @@ public class DataUtilitiesTest {
 	@Test
 	public void testCalculateRowTotalWithNullValues() {
 	    final Number[][] data = new Number[][]{
-	        {1.0, null, 3.0}, // Row with a null value
+	        {1.0, null, 3.0},
 	        {4.0, 5.0, 6.0}
 	    };
 	    Values2D valuesWithNull = new Values2D() {
@@ -742,7 +742,7 @@ public class DataUtilitiesTest {
 	        }
 	    };
 
-	    double expected = 4.0; // Only the non-null values (1.0 and 3.0) in the first row should be summed.
+	    double expected = 4.0;
 	    double actual = DataUtilities.calculateRowTotal(valuesWithNull, 0);
 	    assertEquals("calculateRowTotal should sum non-null values and skip nulls in the specified row", expected, actual, 0.0000001d);
 	}
@@ -757,7 +757,6 @@ public class DataUtilitiesTest {
 	public void testGetCumulativePercentagesWithNullValues() {
 	    DefaultKeyedValues valuesWithNull = new DefaultKeyedValues();
 	    valuesWithNull.addValue("A", 1.0);
-	    // Directly manipulate the data structure to add a null entry
 	    valuesWithNull.addValue("B", null);
 	    valuesWithNull.addValue("C", 2.0);
 	    valuesWithNull.addValue("D", 3.0);
@@ -766,7 +765,6 @@ public class DataUtilitiesTest {
 
 	    DefaultKeyedValues expectedValues = new DefaultKeyedValues();
 	    expectedValues.addValue("A", 1.0 / 6.0);
-	    // Assume that the method should maintain the null entry
 	    expectedValues.addValue("B", null); 
 	    expectedValues.addValue("C", 3.0 / 6.0);
 	    expectedValues.addValue("D", 1.0);

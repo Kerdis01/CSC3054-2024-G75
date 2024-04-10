@@ -862,15 +862,16 @@ public class RangeTest extends TestCase {
     /**
      * Test Case ID: 74
      * Method Under Test: shift()
-     * Description: Verify that shifting a range to the right by a negative delta returns the original range.
-     * Expected Outcome: Since the method does not allow zero crossing, a negative delta should have no effect and return the original range.
+     * Description: Verify that shifting a range to the right by a negative delta returns the expected range.
+     * Expected Outcome: Since the method does not allow zero crossing, a negative delta should shift range to the left.
      */
     @Test
     public void testShiftRightByNegativeDelta() {
         Range base = new Range(1.0, 5.0);
         double delta = -0.5;
         Range actual = Range.shift(base, delta);
-        assertSame("shift: Negative delta should not shift range due to zero crossing prevention", base, actual);
+        Range expected = new Range(0.5,4.5);
+        assertEquals("shift: Negative delta should shift range to the left", expected, actual);
     }
 
     /**
@@ -884,7 +885,7 @@ public class RangeTest extends TestCase {
         Range base = new Range(1.0, 5.0);
         double delta = 0.0;
         Range actual = Range.shift(base, delta);
-        assertSame("shift: Zero delta should return the same range", base, actual);
+        assertEquals("shift: Zero delta should return the same range", base, actual);
     }
 
     /**
@@ -945,7 +946,7 @@ public class RangeTest extends TestCase {
         assertEquals("shift: Positive delta with zero crossing not allowed should return adjusted range", 0.0, actual.getLowerBound(), 0.00001);
         assertEquals("shift: Positive delta with zero crossing not allowed should return adjusted range", 0.0, actual.getUpperBound(), 0.00001);
     }
-
+    
     /**
      * Test Case ID: 80
      * Method Under Test: constrain()
@@ -1003,6 +1004,57 @@ public class RangeTest extends TestCase {
         double actual = range.getCentralValue();
         assertEquals("getCentralValue: Should return central value of the range", expected, actual, 0.00001);
     }
-
+    
+    //Mutation Tests for shift
+    
+    /**
+     * Test Case ID: 84
+     * Method Under Test: shift()
+     * Description: Verify that shifting a range upwards by a positive delta applies correctly, 
+     * especially to catch mutations in the shifting logic that might cause incorrect subtraction 
+     * instead of addition for the range boundaries.
+     * Expected Outcome: The method should correctly increase both the lower and upper bounds 
+     * of the range by the delta, without any incorrect subtraction that a mutation might introduce.
+     */
+    @Test
+    public void testShiftRangeUpwardsByPositiveDelta() {
+        Range base = new Range(1.0, 3.0);
+        double delta = 2.0;
+        Range expected = new Range(3.0, 5.0);
+        Range actual = Range.shift(base, delta, false);
+        assertEquals("shift: Positive delta should correctly shift both bounds of the range upwards", expected, actual);
+    }
+    
+    /**
+    
+    Test Case ID: 85
+    Method Under Test: shift()
+    Description: Verify that shifting a zero value range by a negative delta correctly prevents zero crossing.
+    Expected Outcome: The method should adjust the range to start at zero instead of crossing it, when shifting by a negative delta without allowing zero crossing.
+    */
+    @Test
+    public void testShiftZeroValueRangeByNegativeDelta() {
+        Range base = new Range(0.0, 0.0);
+        double delta = -1.0;
+        Range actual = Range.shift(base, delta, false);
+        assertEquals("shift: Zero value range with negative delta without zero crossing should start at zero", 0.0, actual.getLowerBound(), 0.00001);
+        assertEquals("shift: Zero value range with negative delta without zero crossing should end at zero", 0.0, actual.getUpperBound(), 0.00001);
+    }
+    
+    /**
+    
+    Test Case ID: 86
+    Method Under Test: shift()
+    Description: Verify that shifting a range starting at zero by a positive delta correctly handles the zero starting point.
+    Expected Outcome: The method should correctly shift the range to the right by delta, without incorrectly applying the delta in reverse.
+    */
+    @Test
+    public void testShiftZeroStartByPositiveDelta() {
+        Range base = new Range(0.0, 5.0);
+        double delta = 2.0;
+        Range actual = Range.shift(base, delta, false);
+        assertEquals("shift: Zero start range with positive delta should shift correctly", 2.0, actual.getLowerBound(), 0.00001);
+        assertEquals("shift: Zero start range with positive delta should shift correctly", 7.0, actual.getUpperBound(), 0.00001);
+    }
 
 }
